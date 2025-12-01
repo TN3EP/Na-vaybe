@@ -343,3 +343,36 @@ footer {
     border-color: var(--neon); /* Рамка загорается неоном */
     cursor: crosshair;         /* Курсор-прицел для стиля */
 }
+
+
+/* Утилиты для картинок */
+
+/* Картинка слева, текст обтекает справа */
+.img-left {
+    float: left;
+    margin: 0 15px 10px 0; /* Отступ справа и снизу */
+    max-width: 200px !important; /* Делаем её маленькой */
+    clear: both; /* На всякий случай */
+}
+
+/* Картинка справа, текст обтекает слева */
+.img-right {
+    float: right;
+    margin: 0 0 10px 15px; /* Отступ слева и снизу */
+    max-width: 200px !important;
+    clear: both;
+}
+
+/* Просто маленькая картинка по центру */
+.img-small {
+    max-width: 300px !important;
+    margin: 10px auto;
+    display: block;
+}
+
+/* Хак, чтобы "флоаты" не ломали верстку, если текста мало */
+.post-body::after {
+    content: "";
+    display: table;
+    clear: both;
+}
