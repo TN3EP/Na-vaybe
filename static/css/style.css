@@ -231,7 +231,7 @@ main {
     color: var(--sage-border);
 }
 
-.code-snippet {
+.code-snippet, pre {
     background: #000;
     border: 2px solid var(--sage-border);
     border-style: inset;
@@ -239,8 +239,17 @@ main {
     font-family: 'Courier New', monospace;
     padding: 10px;
     margin: 10px 0;
-    white-space: pre-wrap;
+    white-space: pre-wrap; /* Переносит длинные строки */
     font-size: 11px;
+    overflow-x: auto; /* На всякий случай, если строка супер-длинная */
+}
+
+/* Дополнительно убираем стандартные отступы у pre, чтобы не ломало верстку */
+pre code {
+    background: transparent;
+    border: none;
+    color: inherit;
+    padding: 0;
 }
 
 /* Игры и прочее */
