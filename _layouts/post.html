@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+<article class="post-block">
+    <div class="post-head">
+        <!-- Эти данные берутся из шапки MD файла -->
+        <span>Тема: {{ page.title }}</span>
+        <!-- Форматируем дату -->
+        <span>{{ page.date | date: "%d-%m-%Y, %H:%M" }}</span>
+    </div>
+    
+    <div class="post-body">
+        <!-- Сюда вставится текст твоей статьи -->
+        {{ content }}
+    </div>
+
+    <div class="post-footer">
+        --------------------<br>
+        <i>Пишу код под музыку из Unreal Tournament.</i>
+    </div>
+</article>
+
+<!-- Блок комментов можно оставить тут -->
+<div class="comments-placeholder">
+     <span>[ GISCUS COMMENTS MODULE LOADING... ]</span>
+</div>

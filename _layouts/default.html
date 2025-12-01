@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | NA_VIBE.EXE</title> <!-- Заголовок меняется сам -->
+    <link rel="stylesheet" href="/assets/css/style.css"> <!-- Следи за путем к CSS -->
+</head>
+<body>
+
+<div class="wrapper">
+    
+    <!-- HEADER (Твой код без изменений) -->
+    <header>
+       <!-- ... ТУТ ТВОЙ SVG И ЗАГОЛОВОК ... -->
+       <div class="site-title">
+            <h1>NA_VIBE.EXE</h1>
+            <span>// Indie Gamedev & Code Studies //</span>
+        </div>
+       <!-- ... -->
+    </header>
+
+    <!-- МЕНЮ -->
+    <nav class="main-menu">
+        <a href="/" class="menu-btn">:: Главная</a>
+        <a href="/about" class="menu-btn">:: Девлог</a>
+        <!-- ... -->
+    </nav>
+
+    <div class="layout-grid">
+        
+        <!-- САЙДБАР (Твой код без изменений) -->
+        <aside>
+            <!-- ... ТУТ ВСЕ ТВОИ ВИДЖЕТЫ ... -->
+        </aside>
+
+        <!-- ЦЕНТР (САМОЕ ВАЖНОЕ!) -->
+        <main>
+            {{ content }}
+        </main>
+    </div>
+
+    <!-- ФУТЕР -->
+    <footer>
+        (c) 2005-2025 "На вайбе." Powered by Jekyll.
+    </footer>
+</div>
+</body>
+</html>
