@@ -38,44 +38,4 @@ title: Главная страница
 
 {% endfor %}
 
----
-layout: default
-title: Главная страница
----
-
-<!-- ЦИКЛ: Jekyll пробегает по всем файлам в папке _posts -->
-{% for post in site.posts %}
-
-    <!-- Повторяем твой дизайн блока поста -->
-    <article class="post-block">
-        <div class="post-head">
-            <!-- Ссылка на пост и Заголовок -->
-            <span>Тема: <a href="{{ post.url }}" style="color: #fff; text-decoration: none;">{{ post.title }}</a></span>
-            
-            <!-- Дата (форматируем как у тебя было: 01-12-2025) -->
-            <span>{{ post.date | date: "%d-%m-%Y, %H:%M" }}</span>
-        </div>
-
-        <div class="post-body">
-            <!-- 
-               Тут есть два путя:
-               1. {{ post.content }} - выведет ВЕСЬ текст статьи (как на форумах)
-               2. {{ post.excerpt }} - выведет только первый абзац (если посты длинные)
-               
-               Для твоего вайба лучше выводить всё сразу:
-            -->
-            {{ post.content }}
-        </div>
-        
-        <!-- Подвал поста -->
-        {% if post.music %} 
-        <div class="post-footer">
-            --------------------<br>
-            <i>Now playing: {{ post.music }}</i>
-        </div>
-        {% endif %}
-    </article>
-
-{% endfor %}
-
 <!-- Пагинация (если постов станет больше 10, но это потом настроишь) -->
