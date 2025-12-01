@@ -2,6 +2,7 @@
 layout: post
 title: "Изучаю WebGL и страдаю"
 date: 2025-12-01 4:00:00
+image: "\static\img\лоу поли печенье с фоном 1.png"
 ---
 
 # Всем привет. Решил создать этот блог.
@@ -17,3 +18,9 @@ function gameLoop() {
     draw();
 }
 ```
+<figure style="text-align: center; margin: 20px 0;">
+    <img src="/assets/img/snake-game.png" alt="Snake Game">
+    <figcaption style="color: #708664; font-size: 10px; margin-top: 5px;">
+        [ Скриншот: Тестовый запуск ]
+    </figcaption>
+</figure>
