@@ -8,8 +8,7 @@ date: 2025-12-01 4:00:00
 
 ## Вдохновляюсь старыми форумами. Сейчас ковыряю **Canvas API**.
 **Ощущения как в 2004-м.**
-![]("\ static\img\лоу поли печенье с фоном 1.png")
-
+![](<../static/img/лоу поли печенье с фоном 1.png>)
 <!--more-->
 
 *Вот мой код:*
@@ -21,7 +20,7 @@ function gameLoop() {
 }
 ```
 <figure style="text-align: center; margin: 20px 0;">
-    <img src="/assets/img/snake-game.png" alt="Snake Game">
+    <img src="/static/img/snake-game.png" alt="Snake Game">
     <figcaption style="color: #708664; font-size: 10px; margin-top: 5px;">
         [ Скриншот: Тестовый запуск ]
     </figcaption>
