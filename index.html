@@ -26,14 +26,15 @@ title: Главная страница
         
 
         <div class="post-body">
-            <!-- 
-               Тут есть два путя:
-               1. {{ post.content }} - выведет ВЕСЬ текст статьи (как на форумах)
-               2. {{ post.excerpt }} - выведет только первый абзац (если посты длинные)
-               
-               Для твоего вайба лучше выводить всё сразу:
-            -->
+            <!-- ВЫВОДИМ ТОЛЬКО ПРЕВЬЮ (ТО ЧТО ДО <!--more-->) -->
             {{ post.excerpt }}
+            
+            <!-- КНОПКА "ДАЛЕЕ" -->
+            <div style="text-align: right; margin-top: 15px; border-top: 1px dashed var(--sage-border); padding-top: 10px;">
+                <a href="{{ post.url }}" class="menu-btn" style="text-decoration: none;">
+                    [ Читать далее >> ]
+                </a>
+            </div>
         </div>
         
         <!-- Подвал поста -->
