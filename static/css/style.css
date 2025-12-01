@@ -324,3 +324,22 @@ footer {
     font-family: 'Courier New', monospace;
     font-size: 90%;
 }
+
+/* --- КАРТИНКИ В ПОСТАХ --- */
+
+.post-body img {
+    max-width: 100%;       /* Чтобы картинка не рвала верстку на мобилках */
+    height: auto;          /* Сохраняем пропорции */
+    border: 2px solid var(--sage-border); /* Твоя любимая рамка */
+    border-style: inset;   /* Эффект вдавленности (или outset для выпуклости) */
+    background: #000;      /* Черная подложка */
+    padding: 5px;          /* Отступ от рамки до картинки */
+    margin: 15px 0;        /* Отступы сверху и снизу */
+    display: block;        /* Чтобы margin работал корректно */
+}
+
+/* Эффект при наведении (опционально, для интерактивности) */
+.post-body img:hover {
+    border-color: var(--neon); /* Рамка загорается неоном */
+    cursor: crosshair;         /* Курсор-прицел для стиля */
+}
