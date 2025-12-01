@@ -15,4 +15,4 @@ date: 2025-12-01 4:00:00
 function gameLoop() {
     update();
     draw();
-}`
+}```
