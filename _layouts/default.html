@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Jekyll будет сам подставлять заголовок страницы -->
-    <title>{{ page.title | escape }} | НА_ВАЙБЕ.</title>
+    <title>{{ page.title | escape }} | NA_VIBE.EXE</title>
     <!-- Подключение стилей с помощью Jekyll -->
     <link rel="stylesheet" href="{{ 'static/css/style.css' | relative_url }}">
 </head>
@@ -28,18 +28,6 @@
                       fill="rgba(156, 234, 137, 0.1)" />
         </svg>
 
-        <div class="site-title">
-            <h1>NA_VIBE.EXE</h1>
-            <span>// Indie Gamedev & Code Studies //</span>
-        </div>
-
-        <!-- FPS Counter (теперь оживлен через JS) -->
-        <div class="fps-block">
-            FPS: <span id="fps-counter">60</span><br>
-            MEM: 128MB
-        </div>
-    </header>
-
     <!-- МЕНЮ (ВСЁ ОСТАЁТСЯ) -->
     <nav class="main-menu" id="main-nav">
         <a href="/" class="menu-btn active">:: Главная</a>
@@ -50,23 +38,25 @@
 
     <div class="layout-grid">
         
-        
-        <!-- САЙДБАР -->
+        <!-- САЙДБАР (ВЕСЬ ОСТАЁТСЯ НА МЕСТЕ) -->
         <aside>
             <div class="widget-box">
                 <div class="widget-header">АВТОР</div>
-                <div class="widget-content" style="text-align: center;">
-                    <svg width="80" height="80" style="background: #000; border: 1px solid #708664; margin-bottom: 5px;">
-                        <text x="50%" y="50%" fill="#708664" text-anchor="middle" dy=".3em">IMG</text>
-                        <rect x="10" y="10" width="60" height="60" fill="none" stroke="#708664"/>
-                    </svg>
-                    <div style="font-weight: bold; color: var(--neon);">VibeCoder</div>
-                    <div style="font-size: 10px; color: #aaa;">Junior Entity</div>
-                    <div style="margin-top: 5px;">
-                        <span class="status-online"></span>Online
-                    </div>
-                </div>
+                <!-- ... твой код виджета ... -->
             </div>
+            <div class="widget-box">
+                <div class="widget-header">НАВИГАЦИЯ</div>
+                <!-- ... твой код виджета ... -->
+            </div>
+            <div class="widget-box">
+                <div class="widget-header">ПОСЛЕДНИЕ МЫСЛИ</div>
+                <!-- ... твой код виджета ... -->
+            </div>
+            <div class="widget-box">
+                <div class="widget-header">КОНТАКТЫ</div>
+                <!-- ... твой код виджета ... -->
+            </div>
+        </aside>
 
         <!-- ЦЕНТР -->
         <main>
@@ -80,7 +70,7 @@
 
     <!-- ФУТЕР (ВЕСЬ ОСТАЁТСЯ) -->
     <footer>
-        (c) 2025 "НА ВАЙБЕ." Powered by Jekyll & GitHub Pages.<br>
+        (c) 2005-2025 "На вайбе." Powered by Jekyll & GitHub Pages.<br>
         Optimized for resolution 800x600 and higher.
     </footer>
 </div>
