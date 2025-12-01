@@ -294,3 +294,33 @@ footer {
 }
 
 
+/* --- СТИЛИЗАЦИЯ MARKDOWN КОДА --- */
+
+/* 1. Сам блок кода (черная коробка) */
+.post-body pre {
+    background-color: #000 !important;   /* Черный фон */
+    border: 2px solid var(--sage-border); /* Твоя рамка */
+    border-style: inset;
+    padding: 15px;
+    margin: 20px 0;
+    overflow-x: auto; /* Горизонтальный скролл для длинных строк */
+}
+
+/* 2. Текст внутри блока (неоновый шрифт) */
+.post-body pre code {
+    font-family: 'Courier New', monospace !important;
+    color: var(--neon) !important;       /* Зеленый текст */
+    font-size: 13px;
+    background: transparent !important;  /* Убираем серый фон у букв */
+    border: none !important;
+    text-shadow: none; /* Если вдруг наследуется тень */
+}
+
+/* 3. Код внутри строки (например, когда пишешь `переменная`) */
+.post-body p code {
+    background-color: #11372f !important; /* Темно-зеленый фончик */
+    color: var(--neon) !important;
+    padding: 2px 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 90%;
+}
