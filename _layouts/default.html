@@ -3,47 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} | NA_VIBE.EXE</title> <!-- Заголовок меняется сам -->
-    <link rel="stylesheet" href="{{ '/static/css/style.css' | relative_url }}"> <!-- Следи за путем к CSS -->
+    <!-- Jekyll будет сам подставлять заголовок страницы -->
+    <title>{{ page.title | escape }} | NA_VIBE.EXE</title>
+    <!-- Подключение стилей с помощью Jekyll -->
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
 </head>
 <body>
 
 <div class="wrapper">
     
-    <!-- HEADER (Твой код без изменений) -->
+    <!-- HEADER С ВАЙРФРЕЙМОМ (ВСЁ ОСТАЁТСЯ) -->
     <header>
-       <!-- ... ТУТ ТВОЙ SVG И ЗАГОЛОВОК ... -->
-       <div class="site-title">
+        <svg class="wireframe-bg" viewBox="0 0 400 120" preserveAspectRatio="none">
+            <!-- ... твой SVG код ... -->
+        </svg>
+        <div class="site-title">
             <h1>NA_VIBE.EXE</h1>
             <span>// Indie Gamedev & Code Studies //</span>
         </div>
-       <!-- ... -->
+        <div class="fps-block">
+            FPS: <span id="fps-counter">60</span><br>
+            MEM: 128MB
+        </div>
     </header>
 
-    <!-- МЕНЮ -->
-    <nav class="main-menu">
-        <a href="/" class="menu-btn">:: Главная</a>
-        <a href="/about" class="menu-btn">:: Девлог</a>
-        <!-- ... -->
+    <!-- МЕНЮ (ВСЁ ОСТАЁТСЯ) -->
+    <nav class="main-menu" id="main-nav">
+        <a href="/" class="menu-btn active">:: Главная</a>
+        <a href="#" class="menu-btn">:: Девлог</a>
+        <a href="#" class="menu-btn">:: Игры (JS)</a>
+        <a href="#" class="menu-btn">:: Twitter-мод</a>
     </nav>
 
     <div class="layout-grid">
         
-        <!-- САЙДБАР (Твой код без изменений) -->
+        <!-- САЙДБАР (ВЕСЬ ОСТАЁТСЯ НА МЕСТЕ) -->
         <aside>
-            <!-- ... ТУТ ВСЕ ТВОИ ВИДЖЕТЫ ... -->
+            <div class="widget-box">
+                <div class="widget-header">АВТОР</div>
+                <!-- ... твой код виджета ... -->
+            </div>
+            <div class="widget-box">
+                <div class="widget-header">НАВИГАЦИЯ</div>
+                <!-- ... твой код виджета ... -->
+            </div>
+            <div class="widget-box">
+                <div class="widget-header">ПОСЛЕДНИЕ МЫСЛИ</div>
+                <!-- ... твой код виджета ... -->
+            </div>
+            <div class="widget-box">
+                <div class="widget-header">КОНТАКТЫ</div>
+                <!-- ... твой код виджета ... -->
+            </div>
         </aside>
 
-        <!-- ЦЕНТР (САМОЕ ВАЖНОЕ!) -->
+        <!-- ЦЕНТР -->
         <main>
+            <!-- ============================================ -->
+            <!-- СЮДА JEKYLL БУДЕТ ВСТАВЛЯТЬ КОНТЕНТ СТРАНИЦЫ -->
+            <!-- (посты с главной или текст одной статьи)   -->
             {{ content }}
+            <!-- ============================================ -->
         </main>
     </div>
 
-    <!-- ФУТЕР -->
+    <!-- ФУТЕР (ВЕСЬ ОСТАЁТСЯ) -->
     <footer>
-        (c) 2005-2025 "На вайбе." Powered by Jekyll.
+        (c) 2005-2025 "На вайбе." Powered by Jekyll & GitHub Pages.<br>
+        Optimized for resolution 800x600 and higher.
     </footer>
 </div>
+
+<!-- Подключение скрипта (если он нужен на всех страницах) -->
+<script src="{{ '/script.js' | relative_url }}"></script>
 </body>
 </html>
