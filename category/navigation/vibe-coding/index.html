@@ -1,0 +1,93 @@
+---
+layout: default
+title: Вайб-кодинг
+---
+
+<svg width="100%" height="120" viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="scanlines" patternUnits="userSpaceOnUse" width="2" height="4">
+      <line x1="0" y1="1" x2="2" y2="1" stroke="#000000" stroke-width="2" opacity="0.3"/>
+    </pattern>
+
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=VT323&amp;display=swap');
+      .terminal-text {
+        font-family: 'VT323', 'Courier New', monospace;
+        fill: #39ff14; /* Ярко-зеленый неон */
+        text-anchor: middle;
+        filter: url(#neonGlow);
+      }
+      .sub-text {
+         font-family: 'Courier New', monospace;
+         fill: #8a9a5b; /* Шалфейный цвет (sage) */
+         text-anchor: middle;
+         font-size: 14px;
+      }
+      /* Анимация мигающего курсора */
+      @keyframes blink {
+        0%, 49% { opacity: 1; }
+        50%, 100% { opacity: 0; }
+      }
+      .cursor {
+        animation: blink 1s step-end infinite;
+      }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="600" height="120" fill="#000000"/>
+
+  <rect x="2" y="2" width="596" height="116" fill="none" stroke="#8a9a5b" stroke-width="2" stroke-dasharray="8, 4"/>
+
+  <text x="300" y="55" class="terminal-text" font-size="42">
+    :: ВАЙБ-КОДИНГ ::<tspan class="cursor">_</tspan>
+  </text>
+
+  <text x="300" y="90" class="sub-text">
+    [ STATUS: Поток запущен. Баги игнорируются. ]
+  </text>
+
+  <rect x="0" y="0" width="600" height="120" fill="url(#scanlines)" pointer-events="none"/>
+</svg>
+
+<!-- ЦИКЛ: Берем только посты из категории vibe-code -->
+{% for post in site.categories.vibe-code %}
+
+    <article class="post-block">
+        <div class="post-head">
+            <!-- Ссылку оставляем, чтобы можно было открыть пост отдельно -->
+            <span>LOG: <a href="{{ post.url }}" style="color: #fff; text-decoration: none;">{{ post.title }}</a></span>
+            <span>{{ post.date | date: "%d-%m-%Y" }}</span>
+        </div>
+
+        <!-- В девлоге я убрал блок 'post-cover' с большой картинкой. 
+             Если захочешь вернуть — просто скопируй его сюда из index.html -->
+
+        <div class="post-body">
+            <!-- Выводим превью -->
+            {{ post.excerpt }}
+            
+            <!-- Кнопка далее -->
+            <div class="read-more-bar">
+                <a href="{{ post.url }}" class="menu-btn" style="text-decoration: none;">
+                    [ Читать далее >> ]
+                </a>
+            </div>
+        </div>
+        
+        <!-- Подвал -->
+        {% if post.music %} 
+        <div class="post-footer">
+            <i>Now playing: {{ post.music }}</i>
+        </div>
+        {% endif %}
+    </article>
+
+{% endfor %}

@@ -1,0 +1,354 @@
+---
+layout: default
+title: Библиотека Игр
+---
+
+<div class="post-block" style="text-align: center; margin-bottom: 20px;">
+    <h2 style="color: var(--neon);">:: GAME LIBRARY ::</h2>
+    
+    <!-- ПАНЕЛЬ УПРАВЛЕНИЯ -->
+    <div class="game-controls">
+        
+        <!-- 1. Поиск по названию -->
+        <div class="input-wrapper">
+            <input type="text" id="search-title" placeholder="> Название..." oninput="updateFilter()">
+        </div>
+        
+        <!-- 2. Кастомный выбор жанра -->
+        <div class="custom-select" id="genre-select">
+            <!-- Поле ввода, которое выглядит как селект -->
+            <input type="text" id="genre-input" placeholder="> Жанр: Все" readonly onclick="toggleGenreList()">
+            <div class="select-arrow">▼</div>
+            
+            <!-- Выпадающий список -->
+            <div class="options-list" id="genre-options">
+                <div class="option-item" onclick="selectGenre('')">[ ВСЕ ]</div>
+                <!-- Сюда пиши свои жанры -->
+                <div class="option-item" onclick="selectGenre('Arcade')">Arcade</div>
+                <div class="option-item" onclick="selectGenre('Logic')">Logic</div>
+                <div class="option-item" onclick="selectGenre('Visual Novel')">Visual Novel</div>
+                <div class="option-item" onclick="selectGenre('Shooter')">Shooter</div>
+                <div class="option-item" onclick="selectGenre('RPG')">RPG</div>
+                <div class="option-item" onclick="selectGenre('Horror')">Horror</div>
+            </div>
+        </div>
+
+        <!-- 3. Чекбокс "На вайбе" с тултипом -->
+        <div class="vibe-wrapper">
+            <label class="checkbox-container" id="vibe-label">
+                <input type="checkbox" id="vibe-check" onchange="updateFilter()">
+                <span class="checkmark"></span>
+                <span class="label-text">На вайбе</span>
+                
+                <!-- Тултип -->
+                <div class="tooltip-box">
+                    Этот проект создан нейросетями или в его создании участвовали ИИ.
+                </div>
+            </label>
+        </div>
+
+        <!-- Кнопка сброса -->
+        <button onclick="resetFilter()" class="reset-btn">[ СБРОС ]</button>
+    </div>
+</div>
+
+<!-- СЧЕТЧИК -->
+<div id="games-counter" style="text-align: right; font-size: 10px; color: #555; margin-bottom: 10px;">
+    GAMES FOUND: <span id="count-val">0</span>
+</div>
+
+<!-- СЕТКА ИГР -->
+<div class="games-grid">
+    
+    <!-- Используем квадратные скобки, потому что в названии есть дефис -->
+    {% for game in site['game-posts'] %}
+    <!-- Добавляем data-vibe, чтобы JS мог фильтровать -->
+    <div class="game-card" 
+         data-title="{{ game.title | downcase }}" 
+         data-genre="{{ game.genre | downcase }}"
+         data-vibe="{{ game.vibe }}">
+        
+        <a href="{{ game.url }}" class="game-link">
+            <div class="game-thumb">
+                {% if game.image %}
+                    <img src="{{ game.image | relative_url }}" alt="{{ game.title }}">
+                {% else %}
+                    <div class="no-img">NO IMG</div>
+                {% endif %}
+            </div>
+            
+            <div class="game-info">
+                <div class="game-title">
+                    {{ game.title }}
+                    <!-- Если игра на вайбе, можно добавить иконку и сюда -->
+                    {% if game.vibe %}<span style="color:var(--neon); font-size:9px;">[AI]</span>{% endif %}
+                </div>
+                <div class="game-genre">[{{ game.genre }}]</div>
+                <div class="game-desc">{{ game.description }}</div>
+            </div>
+        </a>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+<script>
+// --- ЛОГИКА КАСТОМНОГО СЕЛЕКТА ---
+function toggleGenreList() {
+    document.getElementById('genre-select').classList.toggle('active');
+}
+
+function selectGenre(val) {
+    let input = document.getElementById('genre-input');
+    input.value = val === "" ? "> Жанр: ALL" : "> Жанр: " + val;
+    input.setAttribute('data-value', val.toLowerCase()); // Сохраняем реальное значение
+    
+    document.getElementById('genre-select').classList.remove('active');
+    updateFilter();
+}
+
+// Закрываем дропдаун, если кликнули мимо
+document.addEventListener('click', function(e) {
+    const select = document.getElementById('genre-select');
+    if (!select.contains(e.target)) {
+        select.classList.remove('active');
+    }
+});
+
+// --- ЛОГИКА ФИЛЬТРАЦИИ ---
+function updateFilter() {
+    let titleInput = document.getElementById('search-title').value.toLowerCase();
+    // Берем значение из атрибута data-value нашего кастомного инпута
+    let genreInput = document.getElementById('genre-input').getAttribute('data-value') || "";
+    let vibeChecked = document.getElementById('vibe-check').checked;
+
+    let cards = document.querySelectorAll('.game-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+        let title = card.getAttribute('data-title');
+        let genre = card.getAttribute('data-genre');
+        let isVibe = card.getAttribute('data-vibe') === 'true';
+
+        let matchTitle = title.includes(titleInput);
+        let matchGenre = genreInput === "" || genre.includes(genreInput);
+        
+        // Логика чекбокса:
+        // Если галочка стоит -> показываем ТОЛЬКО vibe-игры
+        // Если галочка не стоит -> показываем ВСЕ (и vibe, и обычные)
+        // Хочешь наоборот (скрывать AI)? Напиши: let matchVibe = !vibeChecked || !isVibe;
+        
+        // Текущая логика: Галочка работает как ФИЛЬТР (Show only AI)
+        let matchVibe = vibeChecked ? isVibe : true;
+
+        if (matchTitle && matchGenre && matchVibe) {
+            card.style.display = 'block';
+            visibleCount++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    document.getElementById('count-val').innerText = visibleCount;
+}
+
+function resetFilter() {
+    document.getElementById('search-title').value = '';
+    
+    // Сброс кастомного селекта
+    let gInput = document.getElementById('genre-input');
+    gInput.value = "> Жанр: ALL";
+    gInput.setAttribute('data-value', "");
+    
+    document.getElementById('vibe-check').checked = false;
+    
+    updateFilter();
+}
+
+document.addEventListener("DOMContentLoaded", updateFilter);
+</script>
+
+<style>
+/* --- ОБЩИЕ НАСТРОЙКИ ДЛЯ ЭЛЕМЕНТОВ УПРАВЛЕНИЯ --- */
+.game-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+}
+
+/* Общий класс, чтобы сбросить браузерные стили */
+.control-style {
+    height: 32px;                 /* Фиксированная высота для всех */
+    background: #000;
+    border: 1px solid var(--sage-border);
+    color: var(--neon);
+    font-family: 'Courier New', monospace; /* Принудительный шрифт */
+    font-size: 11px;
+    padding: 0 10px;              /* Боковые отступы */
+    box-sizing: border-box;       /* Чтобы padding не ломал размеры */
+}
+.control-style:focus { outline: none; border-color: var(--neon); }
+
+/* --- 1. ИНПУТ ПОИСКА --- */
+#search-title {
+    width: 160px; /* Одинаковая ширина */
+}
+/* Применяем к нему общие стили */
+#search-title {
+    height: 32px;
+    background: #000;
+    border: 1px solid var(--sage-border);
+    color: var(--neon);
+    font-family: 'Courier New', monospace; /* Исправляем шрифт */
+    font-size: 11px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+/* --- 2. КАСТОМНЫЙ ДРОПДАУН --- */
+.custom-select {
+    position: relative;
+    width: 160px; /* Одинаковая ширина */
+    /* Шрифт для выпадающего списка */
+    font-family: 'Courier New', monospace; 
+    font-size: 11px;
+}
+
+/* Поле ввода внутри дропдауна */
+.custom-select input {
+    width: 100%;
+    height: 32px; /* Та же высота */
+    background: #000;
+    border: 1px solid var(--sage-border);
+    color: var(--neon);
+    /* ГЛАВНОЕ ИСПРАВЛЕНИЕ: ПРИНУДИТЕЛЬНО ЗАДАЕМ ШРИФТ ИНПУТУ */
+    font-family: 'Courier New', monospace; 
+    font-size: 11px;
+    padding: 0 25px 0 10px; /* Справа место для стрелки */
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.custom-select input:focus { outline: none; border-color: var(--neon); }
+
+/* Стрелочка */
+.select-arrow {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--sage-border);
+    pointer-events: none;
+    font-size: 9px;
+}
+
+/* Список опций */
+.options-list {
+    display: none;
+    position: absolute;
+    top: 100%; /* Прилипает ровно снизу */
+    left: 0;
+    width: 100%;
+    background: #000;
+    border: 1px solid var(--neon);
+    border-top: none;
+    z-index: 100;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+}
+
+.custom-select.active .options-list { display: block; }
+.custom-select.active input { border-color: var(--neon); border-bottom-color: transparent; }
+
+.option-item {
+    padding: 8px 10px;
+    cursor: pointer;
+    color: #aaa;
+    border-bottom: 1px dashed #333;
+}
+.option-item:hover {
+    background: var(--neon);
+    color: #000;
+}
+
+/* --- 3. ЧЕКБОКС И ТУЛТИП --- */
+.vibe-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 32px; /* Чтобы вертикально центрировалось с инпутами */
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 11px;
+    color: var(--sage-border);
+    user-select: none;
+    position: relative;
+}
+
+.checkbox-container input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+
+.checkmark {
+    height: 14px; width: 14px;
+    background-color: #000; border: 1px solid var(--sage-border);
+    margin-right: 8px; display: flex; align-items: center; justify-content: center;
+}
+
+.checkbox-container:hover .checkmark { border-color: var(--neon); }
+.checkbox-container:hover .label-text { color: var(--neon); }
+
+.checkbox-container input:checked ~ .checkmark:after {
+    content: "X"; color: var(--neon); font-weight: bold; font-size: 10px; font-family: monospace;
+}
+.checkbox-container input:checked ~ .label-text {
+    color: var(--neon); text-shadow: 0 0 5px rgba(156, 234, 137, 0.3);
+}
+
+/* Тултип */
+.tooltip-box {
+    visibility: hidden; width: 180px; background-color: #111; color: #ddd;
+    text-align: center; padding: 8px; border: 1px solid var(--sage-border);
+    position: absolute; z-index: 1000; bottom: 125%; left: 50%;
+    transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;
+    font-size: 10px; box-shadow: 0 0 5px #000; pointer-events: none;
+    /* Важно: тултип наследует шрифт страницы, можно задать явно если надо */
+    font-family: Verdana, sans-serif; 
+}
+.tooltip-box::after {
+    content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px;
+    border-width: 5px; border-style: solid; border-color: var(--sage-border) transparent transparent transparent;
+}
+.checkbox-container:hover .tooltip-box { visibility: visible; opacity: 1; }
+
+/* --- 4. КНОПКА СБРОСА --- */
+.reset-btn {
+    height: 32px; /* Та же высота */
+    background: #222; border: 1px solid var(--sage-border); color: #fff;
+    cursor: pointer; font-family: inherit; font-size: 10px; padding: 0 10px;
+    box-sizing: border-box;
+}
+.reset-btn:hover { background: #500; border-color: #f00; }
+
+/* --- СЕТКА (Остается как была) --- */
+.games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin-top:20px; }
+.game-card { background: #000; border: 1px solid var(--sage-border); transition: 0.2s; }
+.game-card:hover { border-color: var(--neon); transform: translateY(-2px); }
+.game-link { text-decoration: none; color: inherit; display: block; }
+.game-thumb { height: 100px; border-bottom: 1px solid var(--sage-border); overflow: hidden; }
+.game-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.no-img { width:100%; height:100%; background:#222; display:flex; align-items:center; justify-content:center; color:#555; }
+.game-info { padding: 10px; }
+.game-title { color: var(--neon); font-weight: bold; font-size: 11px; margin-bottom: 3px; }
+.game-genre { color: #555; font-size: 9px; margin-bottom: 5px; text-transform: uppercase; }
+.game-desc { font-size: 10px; color: #aaa; line-height: 1.2; }
+</style>

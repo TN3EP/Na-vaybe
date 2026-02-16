@@ -1,0 +1,147 @@
+---
+layout: default
+title: Twitter-Mode
+---
+
+<div class="post-block" style="text-align: center; margin-bottom: 20px;">
+    <h2 style="color: var(--neon);">:: ТВИТТЕР-МОД ::</h2>
+    <small>Поток сознания. (почти) Без цензуры. Без редактора.</small>
+</div>
+
+<div class="twitter-feed">
+
+    <!-- БЕРЕМ ИЗ КОЛЛЕКЦИИ -->
+    {% for tweet in site.tweets reversed %}
+    
+    <!-- Используем tweet.slug как уникальный ID (это имя файла без даты) -->
+    <div class="tweet-card" id="tweet-{{ tweet.slug }}">
+        
+        <div class="tweet-header">
+            <img src="{{ '/static/img/avatar/avatar-1.png' | relative_url }}" class="tweet-avatar" alt="Avatar">
+            <div class="tweet-meta">
+                <span class="tweet-nick">TN3EP</span>
+                <!-- Дата в коллекциях работает так же -->
+                <span class="tweet-date">{{ tweet.date | date: "%d.%m.%Y - %H:%M" }}</span>
+            </div>
+        </div>
+
+        <div class="tweet-content">
+            {{ tweet.content }}
+        </div>
+
+        <div class="tweet-actions">
+            <button class="action-btn" onclick="toggleComments('comments-{{ tweet.slug }}')">
+                [ КОММЕНТАРИИ ]
+            </button>
+        </div>
+
+        <div id="comments-{{ tweet.slug }}" class="comments-section" style="display: none;">
+            <div style="padding: 10px; border: 1px dashed #444; margin-top: 10px; background: #111;">
+                <p style="color: #666; margin:0;">// Комментарии к посту //</p>
+                <div style="text-align: right; margin-top: 10px;">
+                     <button class="action-btn" onclick="toggleComments('comments-{{ tweet.slug }}')">
+                        [ СКРЫТЬ ]
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+<script>
+function toggleComments(id) {
+    let el = document.getElementById(id);
+    if (el.style.display === "none") {
+        el.style.display = "block";
+    } else {
+        el.style.display = "none";
+    }
+}
+</script>
+
+<style>
+/* СТИЛИ ДЛЯ ТВИТОВ */
+.tweet-card {
+    background: #1b1819;
+    border: 1px solid var(--sage-border);
+    padding: 15px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Подсветка при переходе по ссылке из сайдбара */
+.tweet-card:target {
+    border-color: var(--neon);
+    box-shadow: 0 0 10px rgba(156, 234, 137, 0.2);
+}
+
+.tweet-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #222;
+    padding-bottom: 10px;
+}
+
+.tweet-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%; /* Круглая, как в твиттере */
+    border: 1px solid var(--neon);
+    object-fit: cover;
+}
+
+.tweet-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.tweet-nick {
+    color: var(--neon);
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.tweet-date {
+    color: #666;
+    font-size: 10px;
+}
+
+.tweet-content {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #ddd;
+    margin-bottom: 15px;
+}
+
+/* Кнопки */
+.tweet-actions {
+    text-align: right;
+}
+
+.action-btn {
+    background: transparent;
+    border: 1px solid #444;
+    color: #888;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    padding: 4px 8px;
+}
+.action-btn:hover {
+    border-color: var(--neon);
+    color: var(--neon);
+}
+
+.comments-section {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>

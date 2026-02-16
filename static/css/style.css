@@ -333,7 +333,7 @@ footer {
     border: 2px solid var(--sage-border); /* Твоя любимая рамка */
     border-style: inset;   /* Эффект вдавленности (или outset для выпуклости) */
     background: #000;      /* Черная подложка */
-    padding: 5px;          /* Отступ от рамки до картинки */
+    padding: 3px;          /* Отступ от рамки до картинки */
     margin: 15px 0;        /* Отступы сверху и снизу */
     display: block;        /* Чтобы margin работал корректно */
 }
@@ -348,15 +348,105 @@ footer {
 /* --- КОНСТРУКТОР КАРТИНОК --- */
 
 /* 1. РАЗМЕРЫ (Ширина картинки) */
+.w-1   { max-width: 1% !important; }
+.w-2   { max-width: 2% !important; }
+.w-3   { max-width: 3% !important; }
+.w-4   { max-width: 4% !important; }
+.w-5   { max-width: 5% !important; }
+.w-6   { max-width: 6% !important; }
+.w-7   { max-width: 7% !important; }
+.w-8   { max-width: 8% !important; }
+.w-9   { max-width: 9% !important; }
 .w-10  { max-width: 10% !important; }
+.w-11  { max-width: 11% !important; }
+.w-12  { max-width: 12% !important; }
+.w-13  { max-width: 13% !important; }
+.w-14  { max-width: 14% !important; }
+.w-15  { max-width: 15% !important; }
+.w-16  { max-width: 16% !important; }
+.w-17  { max-width: 17% !important; }
+.w-18  { max-width: 18% !important; }
+.w-19  { max-width: 19% !important; }
 .w-20  { max-width: 20% !important; }
+.w-21  { max-width: 21% !important; }
+.w-22  { max-width: 22% !important; }
+.w-23  { max-width: 23% !important; }
+.w-24  { max-width: 24% !important; }
+.w-25  { max-width: 25% !important; }
+.w-26  { max-width: 26% !important; }
+.w-27  { max-width: 27% !important; }
+.w-28  { max-width: 28% !important; }
+.w-29  { max-width: 29% !important; }
 .w-30  { max-width: 30% !important; }
+.w-31  { max-width: 31% !important; }
+.w-32  { max-width: 32% !important; }
+.w-33  { max-width: 33% !important; }
+.w-34  { max-width: 34% !important; }
+.w-35  { max-width: 35% !important; }
+.w-36  { max-width: 36% !important; }
+.w-37  { max-width: 37% !important; }
+.w-38  { max-width: 38% !important; }
+.w-39  { max-width: 39% !important; }
 .w-40  { max-width: 40% !important; }
+.w-41  { max-width: 41% !important; }
+.w-42  { max-width: 42% !important; }
+.w-43  { max-width: 43% !important; }
+.w-44  { max-width: 44% !important; }
+.w-45  { max-width: 45% !important; }
+.w-46  { max-width: 46% !important; }
+.w-47  { max-width: 47% !important; }
+.w-48  { max-width: 48% !important; }
+.w-49  { max-width: 49% !important; }
 .w-50  { max-width: 50% !important; }
+.w-51  { max-width: 51% !important; }
+.w-52  { max-width: 52% !important; }
+.w-53  { max-width: 53% !important; }
+.w-54  { max-width: 54% !important; }
+.w-55  { max-width: 55% !important; }
+.w-56  { max-width: 56% !important; }
+.w-57  { max-width: 57% !important; }
+.w-58  { max-width: 58% !important; }
+.w-59  { max-width: 59% !important; }
 .w-60  { max-width: 60% !important; }
+.w-61  { max-width: 61% !important; }
+.w-62  { max-width: 62% !important; }
+.w-63  { max-width: 63% !important; }
+.w-64  { max-width: 64% !important; }
+.w-65  { max-width: 65% !important; }
+.w-66  { max-width: 66% !important; }
+.w-67  { max-width: 67% !important; }
+.w-68  { max-width: 68% !important; }
+.w-69  { max-width: 69% !important; }
 .w-70  { max-width: 70% !important; }
+.w-71  { max-width: 71% !important; }
+.w-72  { max-width: 72% !important; }
+.w-73  { max-width: 73% !important; }
+.w-74  { max-width: 74% !important; }
+.w-75  { max-width: 75% !important; }
+.w-76  { max-width: 76% !important; }
+.w-77  { max-width: 77% !important; }
+.w-78  { max-width: 78% !important; }
+.w-79  { max-width: 79% !important; }
 .w-80  { max-width: 80% !important; }
+.w-81  { max-width: 81% !important; }
+.w-82  { max-width: 82% !important; }
+.w-83  { max-width: 83% !important; }
+.w-84  { max-width: 84% !important; }
+.w-85  { max-width: 85% !important; }
+.w-86  { max-width: 86% !important; }
+.w-87  { max-width: 87% !important; }
+.w-88  { max-width: 88% !important; }
+.w-89  { max-width: 89% !important; }
 .w-90  { max-width: 90% !important; }
+.w-91  { max-width: 91% !important; }
+.w-92  { max-width: 92% !important; }
+.w-93  { max-width: 93% !important; }
+.w-94  { max-width: 94% !important; }
+.w-95  { max-width: 95% !important; }
+.w-96  { max-width: 96% !important; }
+.w-97  { max-width: 97% !important; }
+.w-98  { max-width: 98% !important; }
+.w-99  { max-width: 99% !important; }
 .w-100 { max-width: 100% !important; } /* На всю ширину */
 
 /* 2. ПОЛОЖЕНИЕ И ОБТЕКАНИЕ */
@@ -394,3 +484,203 @@ footer {
     display: table;
     clear: both;
 }
+
+/* --- ФИНАЛЬНЫЙ ВАРИАНТ ОБТЕКАНИЯ (AGRESSIVE FLOAT) --- */
+
+/* 1. Блок поста - основа */
+.post-body {
+    display: flow-root; /* Чтобы плавающие элементы не вылезали наружу */
+}
+
+
+/* 3. УБИРАЕМ ПУСТОТЫ У ЗАГОЛОВКА СПРАВА */
+/* Селектор означает: "Любой элемент, идущий сразу после картинки" */
+.post-body > p:has(> img) + h1,
+.post-body > p:has(> img) + h2,
+.post-body > p:has(> img) + p,
+.post-body > p:has(> img) + div {
+    margin-top: 0 !important;      /* Убираем дыру сверху */
+    padding-top: 0 !important;
+    line-height: 1.1 !important;   /* Поджимаем расстояние между строками заголовка */
+}
+
+/* 4. Убираем дыру МЕЖДУ заголовком и текстом описания */
+.post-body h1 {
+    margin-bottom: 10px !important; /* Сделаем отступ снизу компактным */
+}
+
+
+.read-more-bar {
+    clear: both; /* <--- ВОТ ЭТА МАГИЯ. Спускает блок под картинку */
+    text-align: right;
+    margin-top: 15px;
+    border-top: 1px dashed var(--sage-border);
+    padding-top: 10px;
+    width: 100%; /* Растягиваем на всю ширину */
+}
+
+/* --- ФИКС ОТСТУПОВ ДЛЯ ПОСТОВ БЕЗ КАРТИНОК --- */
+
+/* 1. Убираем margin-top у самого первого элемента внутри тела поста */
+.post-body > *:first-child {
+    margin-top: 0 !important;
+}
+
+/* 2. Защита от "фантомных" пустых строк */
+/* Иногда Markdown создает пустые <p></p> в начале, если нажать много Enter */
+.post-body p:empty {
+    display: none;
+}
+
+/* --- ФИКС ОТСТУПОВ МЕЖДУ ТЕКСТОМ И КОДОМ --- */
+
+/* 1. Уменьшаем отступ снизу у текста, если сразу за ним идет код */
+.post-body p:has(+ .highlighter-rouge),
+.post-body p:has(+ .highlight) {
+    margin-bottom: 5px !important; /* Было где-то 15-20px */
+}
+
+/* 2. Уменьшаем отступ сверху у самого блока кода */
+.post-body .highlighter-rouge,
+.post-body .highlight {
+    margin-top: 0 !important;      /* Подтягиваем код к тексту */
+    margin-bottom: 20px !important; /* А снизу отступ оставляем */
+}
+
+
+/* --- ЛЕЙБЛЫ ДЛЯ КОДА (FIXED) --- */
+
+/* 1. Сначала ЗАПРЕЩАЕМ лейблы на внутренних блоках, чтобы не двоилось */
+.post-body .highlight::before {
+    content: none !important;
+    display: none !important;
+}
+
+/* 2. Настраиваем базу ТОЛЬКО для внешнего контейнера (.highlighter-rouge) */
+.post-body .highlighter-rouge {
+    position: relative;
+}
+
+.post-body .highlighter-rouge::before {
+    content: "CODE";             /* Текст по умолчанию */
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--sage-border); /* Цвет по умолчанию */
+    color: #000;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    z-index: 10;
+    pointer-events: none; /* Чтобы можно было выделить код под лейблом */
+}
+
+/* 3. Переопределяем текст и цвет для конкретных языков */
+/* Важно: селектор должен быть слитным (.highlighter-rouge.language-...) */
+
+/* JAVASCRIPT */
+.post-body .highlighter-rouge.language-javascript::before,
+.post-body .highlighter-rouge.language-js::before {
+    content: "JS";
+    background: #f7df1e; /* Желтый */
+}
+
+/* HTML */
+.post-body .highlighter-rouge.language-html::before {
+    content: "HTML";
+    background: #e34c26; /* Оранжевый */
+}
+
+/* CSS */
+.post-body .highlighter-rouge.language-css::before {
+    content: "CSS";
+    background: #264de4; /* Синий */
+    color: #fff;
+}
+
+/* C++ */
+.post-body .highlighter-rouge.language-cpp::before,
+.post-body .highlighter-rouge.language-c\+\+::before {
+    content: "C++";
+    background: #00599c; /* Синий потемнее */
+    color: #fff;
+}
+
+/* GLSL / SHADERS */
+.post-body .highlighter-rouge.language-glsl::before {
+    content: "GLSL";
+    background: var(--neon);
+    color: #000;
+}
+
+/* TXT */
+.post-body .highlighter-rouge.language-text::before,
+.post-body .highlighter-rouge.language-plaintext::before {
+    content: "TXT";
+    background: #646464;       /* серый для TXT */
+    color: #fff;
+}
+/* Можно добавить сколько угодно языков по аналогии */
+
+
+/* --- СТИЛИЗАЦИЯ ПОЛОСЫ ПРОКРУТКИ (КВАДРАТНАЯ) --- */
+
+/* 1. Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--sage-border) #2b2627;
+}
+
+/* 2. Webkit (Chrome, Edge, Opera, Safari) */
+
+/* Ширина дорожки */
+::-webkit-scrollbar {
+    width: 14px;               /* Чуть шире, чтобы выглядело брутально */
+    height: 14px;
+    background: #2b2627;
+}
+
+/* Трек (фон) */
+::-webkit-scrollbar-track {
+    background: #2b2627;
+    border-left: 1px solid var(--sage-border); /* Линия-разделитель */
+    border-radius: 10px;
+}
+
+/* Ползунок (КИРПИЧ) */
+::-webkit-scrollbar-thumb {
+    background-color: var(--sage-border);
+    border: 2px solid #2b2627;    /* Черная рамка внутри создает эффект "блока" */
+    border-radius: 10px; /* <--- САМОЕ ГЛАВНОЕ: УБИВАЕМ ОКРУГЛОСТЬ */
+}
+
+/* Ползунок при наведении */
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--neon);
+}
+
+/* Уголок (пересечение скроллов) */
+::-webkit-scrollbar-corner {
+    background: #2b2627;
+    border: 1px solid var(--sage-border);
+}
+
+/* --- НАСТРОЙКИ GISCUS --- */
+
+.comments-wrapper {
+    /* Чтобы блок не прилипал к краям на мобилках */
+    max-width: 100%;
+    overflow: hidden; 
+}
+
+/* Сам фрейм комментариев */
+giscus-widget {
+    margin-top: 10px;
+}
+
+/* Если вдруг захочешь кастомизировать еще глубже, 
+   нужно создавать свой JSON файл темы, но transparent_dark 
+   обычно хватает на 99% для темных сайтов */

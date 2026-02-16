@@ -15,7 +15,17 @@
     <!-- HEADER С ВАЙРФРЕЙМОМ (ВСЁ ОСТАЁТСЯ) -->
     <header>
         <svg class="wireframe-bg" viewBox="0 0 400 120" preserveAspectRatio="none">
-            <!-- ... твой SVG код ... -->
+            class="wireframe-bg" viewBox="0 0 400 120" preserveAspectRatio="none">
+            <defs>
+                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#9cea89" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+            <polyline points="0,120 50,80 100,100 150,50 200,90 250,40 300,100 400,120" 
+                      fill="none" stroke="#9cea89" stroke-width="1.5" />
+            <polyline points="0,120 80,120 150,50 220,120 400,120" 
+                      fill="rgba(156, 234, 137, 0.1)" />
         </svg>
         <div class="site-title">
             <h1>NA_VIBE.EXE</h1>
@@ -27,12 +37,37 @@
         </div>
     </header>
 
-    <!-- МЕНЮ (ВСЁ ОСТАЁТСЯ) -->
+    <!-- МЕНЮ -->
     <nav class="main-menu" id="main-nav">
-        <a href="/" class="menu-btn active">:: Главная</a>
-        <a href="#" class="menu-btn">:: Девлог</a>
-        <a href="#" class="menu-btn">:: Игры (JS)</a>
-        <a href="#" class="menu-btn">:: Twitter-мод</a>
+        
+        <!-- 1. ГЛАВНАЯ -->
+        <!-- Горит только если мы точно в корне сайта -->
+        <a href="{{ '/' | relative_url }}" 
+           class="menu-btn {% if page.url == '/' %}active{% endif %}">
+           :: Главная
+        </a>
+
+        <!-- 2. ДЕВЛОГ -->
+        <!-- Горит, если мы в папке category/devlog -->
+        <a href="{{ '/category/devlog/' | relative_url }}" 
+           class="menu-btn {% if page.url contains '/category/devlog/' %}active{% endif %}">
+           :: Девлог
+        </a>
+
+        <!-- 3. ИГРЫ (ОБНОВЛЕНО) -->
+        <!-- Горит, если мы в библиотеке (/category/games/) ИЛИ внутри конкретной игры (/games/...) -->
+        <a href="{{ '/category/games/' | relative_url }}" 
+           class="menu-btn {% if page.url contains '/category/games/' or page.url contains '/games/' %}active{% endif %}">
+           :: Игры
+        </a>
+
+        <!-- 4. TWITTER-МОД (ОБНОВЛЕНО) -->
+        <!-- Горит, если мы в ленте (/category/twitter/) ИЛИ читаем отдельный твит (/tweets/...) -->
+        <a href="{{ '/category/twitter/' | relative_url }}" 
+           class="menu-btn {% if page.url contains '/category/twitter/' or page.url contains '/tweets/' %}active{% endif %}">
+           :: Twitter-мод
+        </a>
+
     </nav>
 
     <div class="layout-grid">
@@ -42,12 +77,12 @@
             <div class="widget-box">
                 <div class="widget-header">АВТОР</div>
                 <div class="widget-content" style="text-align: center;">
-                    <svg width="80" height="80" style="background: #000; border: 1px solid #708664; margin-bottom: 5px;">
-                        <text x="50%" y="50%" fill="#708664" text-anchor="middle" dy=".3em">IMG</text>
-                        <rect x="10" y="10" width="60" height="60" fill="none" stroke="#708664"/>
-                    </svg>
-                    <div style="font-weight: bold; color: var(--neon);">VibeCoder</div>
-                    <div style="font-size: 10px; color: #aaa;">Junior Entity</div>
+                    <img src="{{ 'static/img/avatar/avatar-1.png' | relative_url }}" 
+                        alt="Avatar" 
+                        style="width: 80px; height: 80px; object-fit: cover; background: #000; border: 1px solid #708664; margin-bottom: 5px;">
+                    
+                        <div style="font-weight: bold; color: var(--neon);">TN3EP</div>
+                    <div style="font-size: 10px; color: #aaa;">Creator</div>
                     <div style="margin-top: 5px;">
                         <span class="status-online"></span>Online
                     </div>
@@ -58,23 +93,51 @@
                 <div class="widget-header">НАВИГАЦИЯ</div>
                 <div class="widget-content">
                     <ul class="nav-list">
-                        <li><a href="#">Архив 2024</a></li>
-                        <li><a href="#">Сниппеты</a></li>
-                        <li><a href="#">Blitz3D (R.I.P)</a></li>
-                        <li><a href="#">JS Experiments</a></li>
+                        <li><a href="/category/navigation/vibe-coding">Вайб-кодинг</a></li>
+                        <li><a href="#"></a>Скоро...</li>
+                        <li><a href="#"></a>Скоро...</li>
+                        <li><a href="#"></a>Скоро...</li>
                     </ul>
                 </div>
             </div>
 
+            <!--ПОСЛЕДНИЕ МЫСЛИ-->
             <div class="widget-box">
                 <div class="widget-header">ПОСЛЕДНИЕ МЫСЛИ</div>
                 <div class="widget-content" style="font-size: 10px;">
-                    <div class="thought-bubble">
-                        Изучаю WebGL. Это как DirectX 7, только в браузере.
-                    </div>
-                    <div class="thought-bubble">
-                        Нашел старый диск с "Игроманией". Ностальгия.
-                    </div>
+                    
+                    <!-- 1. Сначала сортируем твиты в переменную (так надежнее) -->
+                    <!-- Если коллекция пустая, assign просто создаст пустой массив -->
+                    {% assign sorted_tweets = site.tweets | reverse %}
+                    
+                    <!-- 2. Запускаем цикл с лимитом -->
+                    {% for tweet in sorted_tweets limit:2 %}
+                    
+                        <div class="thought-bubble">
+                            <!-- Сам текст -->
+                            {{ tweet.content | strip_html | truncatewords: 15, "..." }}
+                            
+                            <!-- Кнопка "Далее" -->
+                            {% assign words = tweet.content | split: ' ' %}
+                            {% if words.size > 15 %}
+                                <br>
+                                <a href="{{ '/category/twitter/' | relative_url }}#tweet-{{ tweet.slug }}" 
+                                   style="color: var(--neon); text-decoration: underline; cursor: pointer;">
+                                    Далее..
+                                </a>
+                            {% endif %} <!-- Убедись, что этот endif на месте! -->
+                        </div>
+
+                    {% endfor %} <!-- Ошибка была тут, потому что движок терял начало -->
+                    
+                    <!-- 3. Если твитов вообще нет -->
+                    {% if sorted_tweets.size == 0 %}
+                        <div class="thought-bubble">Тишина в эфире...</div>
+                        <div class="thought-bubble" style="color: #666;">
+                            (Создайте файл в папке _tweets, чтобы тут что-то появилось)
+                        </div>
+                    {% endif %}
+
                 </div>
             </div>
 
@@ -111,5 +174,7 @@
 
 <!-- Подключение скрипта (если он нужен на всех страницах) -->
 <script src="{{ '/script.js' | relative_url }}"></script>
+
+
 </body>
 </html>

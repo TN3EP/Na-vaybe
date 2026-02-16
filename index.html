@@ -3,8 +3,8 @@ layout: default
 title: Главная страница
 ---
 
-<!-- ЦИКЛ: Jekyll пробегает по всем файлам в папке _posts -->
-{% for post in site.posts %}
+<!-- ЦИКЛ: Берем только посты из категории SHOWCASE -->
+{% for post in site.categories.showcase %}
 
     <!-- Повторяем твой дизайн блока поста -->
     <article class="post-block">
@@ -26,16 +26,15 @@ title: Главная страница
         
 
         <div class="post-body">
-            <!-- ВЫВОДИМ ТОЛЬКО ПРЕВЬЮ (ТО ЧТО ДО <!--more-->) -->
+            <!-- ВЫВОДИМ ТОЛЬКО ПРЕВЬЮ (ТО ЧТО ДО <!--more-->
             {{ post.excerpt }}
             
             <!-- КНОПКА "ДАЛЕЕ" -->
-            <div style="text-align: right; margin-top: 15px; border-top: 1px dashed var(--sage-border); padding-top: 10px;">
+            <div class="read-more-bar">
                 <a href="{{ post.url }}" class="menu-btn" style="text-decoration: none;">
                     [ Читать далее >> ]
                 </a>
             </div>
-        </div>
         
         <!-- Подвал поста -->
         {% if post.music %} 

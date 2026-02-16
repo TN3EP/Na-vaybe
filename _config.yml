@@ -1,2 +1,10 @@
 future: true
 excerpt_separator: "<!--more-->"
+collections:
+  tweets:
+    output: true     # Создавать ли для них отдельные страницы? (Пусть будет true для ссылок)
+    permalink: /tweets/:year/:month/:day/:title/
+    
+  game-posts:         # Имя коллекции (совпадает с именем папки без подчеркивания)
+    output: true      # Создавать отдельные HTML страницы для игр? ДА.
+    permalink: /games/:slug/  # Красивая ссылка (наприм: site.com/games/snake/)
